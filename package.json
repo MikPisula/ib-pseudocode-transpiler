@@ -11,6 +11,6 @@
   "scripts": {
     "test": "mocha"
   },
-  "author": "",
+  "author": "MikPisula",
   "license": "MIT"
 }
