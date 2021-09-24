@@ -1,0 +1,16 @@
+{
+  "name": "ib-pseudocode-transpiler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "dependencies": {
+    "mocha": "^9.1.1",
+    "peggy": "^1.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "MIT"
+}

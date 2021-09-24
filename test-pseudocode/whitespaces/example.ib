@@ -1,0 +1,11 @@
+X = 5
+
+if X <= 0 then 
+    if X < 0 then
+        output "X is smaller"
+    else
+        output "X is equal to 0"
+    end if
+else
+    output "X is larger than 0"
+end if
