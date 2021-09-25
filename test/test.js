@@ -2,8 +2,6 @@ const assert = require("assert");
 const peggy = require("peggy");
 const fs = require("fs");
 
-const path = "./test-pseudocode/whitespaces";
-
 const read = file => fs.readFileSync(file, "utf8");
 
 
@@ -16,6 +14,8 @@ describe("parser", function() {
         })
 
         describe("ignores whitespaces", function() {
+            const path = "./test/whitespaces";
+
             let example = parser.parse(read(path + "/example.ib"));
             let tests = fs.readdirSync(path + "/tests");
 
