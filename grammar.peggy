@@ -65,6 +65,7 @@ QuotientToken = "div"
 
 Statement
   = Assignment
+  / MathematicalExpression
   / IfStatement
   / OutputStatement
 
@@ -119,6 +120,8 @@ ConditionToken
   / GreaterThanEqualToken
   / GreaterThanToken
   / LessThanToken
+
+
   
 LogicalCondition "LogicalCondition"
   = right:SimpleCondition __ token:LogicalToken __ left:SimpleCondition {
@@ -133,6 +136,7 @@ LogicalCondition "LogicalCondition"
 LogicalToken
   = AndToken
   / OrToken
+
     
 OutputStatement
   = OutputToken __ value:Value {
@@ -151,6 +155,44 @@ Assignment
     }    
   }
   
+MathematicalExpression
+  = AdditiveExpression / MultiplicativeExpression
+  
+AdditiveExpression
+  = head:MultiplicativeExpression tail:(__ ("+" / "-") __ MultiplicativeExpression)* {
+    return {
+      	type: "additiveexpression",
+        terms: [head].concat(tail.map(v => {
+			return {
+            	type: "operation",
+            	operator: v[1],
+                value: v[3]
+            }
+		}))
+    }
+  }
+
+MultiplicativeExpression
+  = head:Factor tail:(__ ("*" / "/") __ Factor)* {
+    return {
+      	type: "multiplicativeexpression",
+        factors: [head].concat(tail.map(v => {
+			return {
+            	type: "operation",
+            	operator: v[1],
+                value: v[3]
+            }
+		}))
+    }
+  }
+    
+Factor
+  = "(" __ expr:MathematicalExpression __ ")" { return expr; }
+  / Integer
+  / Symbol
+  
+
+/*
 Mod
   = left:MathematicalValue __ ModuloToken __ right:MathematicalValue {
   	return {
@@ -172,13 +214,11 @@ Quotient
 MathematicalValue
   = Integer
   / Symbol
-  
-MathematicalOperation
- = Mod / Quotient
-    
+*/
+
 Value
-  = MathematicalOperation
-  / Symbol
+  = Symbol
+  / MathematicalExpression
   / Integer
   / String
 
@@ -191,7 +231,9 @@ Symbol "Symbol"
   }
 
 Integer "Integer"
-  = [0-9]+ { return parseInt(text(), 10); }
+  = [0-9]+ {
+    return { type: "integer", value: parseInt(text(), 10) }
+  }
   
 String "String"
   = '"' chars:DoubleStringCharacter* '"' {
