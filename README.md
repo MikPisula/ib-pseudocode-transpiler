@@ -1,8 +1,9 @@
 # ib-pseudocode-transpiler
-This project is still in development. 
 [![Github License][license]](https://github.com/MikPisula/ib-pseudocode-transpiler/blob/mainLICENSE)
 
 [license]: https://img.shields.io/github/license/MikPisula/ib-pseudocode-transpiler
+
+This project is still in development. 
 
 ## Parser
 The grammar is written in accordance with [the approved notation sheet from the IB](https://computersciencewiki.org/images/3/3e/Approved_notation_for_developing_pseudocode.pdf).
