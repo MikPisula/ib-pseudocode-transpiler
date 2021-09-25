@@ -1,7 +1,9 @@
 # ib-pseudocode-transpiler
-[![Github License][license]](https://github.com/MikPisula/ib-pseudocode-transpiler/blob/mainLICENSE)
+[![Github License][license]](https://github.com/MikPisula/ib-pseudocode-transpiler/blob/main/LICENSE)
+[![forthebadge][magic]](https://github.com/MikPisula/ib-pseudocode-transpiler/blob/main/grammar.peggy)
 
 [license]: https://img.shields.io/github/license/MikPisula/ib-pseudocode-transpiler
+[magic]: https://forthebadge.com/images/badges/powered-by-black-magic.svg
 
 This project is still in development. 
 
