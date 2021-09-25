@@ -1,11 +1,10 @@
 # ib-pseudocode-transpiler
 [![Github License][license]](https://github.com/MikPisula/ib-pseudocode-transpiler/blob/main/LICENSE)
-[![forthebadge][magic]](https://github.com/MikPisula/ib-pseudocode-transpiler/blob/main/grammar.peggy)
+<a href="https://github.com/MikPisula/ib-pseudocode-transpiler/blob/main/grammar.peggy"><img src="https://forthebadge.com/images/badges/powered-by-black-magic.svg" height="28" /></a>
 
-[license]: https://img.shields.io/github/license/MikPisula/ib-pseudocode-transpiler
-[magic]: https://forthebadge.com/images/badges/powered-by-black-magic.svg
+[license]: https://img.shields.io/github/license/MikPisula/ib-pseudocode-transpiler?style=for-the-badge
 
-This project is still in development. 
+Transpiles IB pseudocode into JavaScript. **Note: This project is at a very early stage.**
 
 ## Parser
 The grammar is written in accordance with [the approved notation sheet from the IB](https://computersciencewiki.org/images/3/3e/Approved_notation_for_developing_pseudocode.pdf).
