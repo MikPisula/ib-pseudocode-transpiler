@@ -14,6 +14,7 @@ The grammar is written in accordance with [the approved notation sheet from the 
   - Assignable values
     - [x] Integers
     - [x] Strings
+    - [ ] Arrays
 - Comments
   - [x] Single line comments
 - `if` statements
@@ -28,6 +29,10 @@ The grammar is written in accordance with [the approved notation sheet from the 
 - I/O
   - [x] `output` statements
   - [ ] `input` statements (im lazy ok?)
+- Mathematical Expressions
+  - [x] Additive & Multiplicative
+  - [ ] Modulo
+  - [ ] Quotient
 
 ---
 
