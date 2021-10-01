@@ -1,6 +1,6 @@
 # ib-pseudocode-transpiler
 [![Github License][license]](https://github.com/MikPisula/ib-pseudocode-transpiler/blob/main/LICENSE)
-<a href="https://github.com/MikPisula/ib-pseudocode-transpiler/blob/main/grammar.peggy"><img src="https://forthebadge.com/images/badges/powered-by-black-magic.svg" height="28" /></a>
+<a href="https://github.com/MikPisula/ib-pseudocode-transpiler/blob/main/grammar.pegjs"><img src="https://forthebadge.com/images/badges/powered-by-black-magic.svg" height="28" /></a>
 
 [license]: https://img.shields.io/github/license/MikPisula/ib-pseudocode-transpiler?style=for-the-badge
 

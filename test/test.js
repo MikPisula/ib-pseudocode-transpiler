@@ -6,7 +6,7 @@ const read = file => fs.readFileSync(file, "utf8");
 
 
 describe("parser", function() {
-    const parser = peggy.generate(read("grammar.peggy"));
+    const parser = peggy.generate(read("grammar.pegjs"));
 
     describe("parse()", function() {
         it("returns an empty program", function() {
