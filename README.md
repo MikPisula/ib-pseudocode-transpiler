@@ -25,8 +25,8 @@ The grammar is written in accordance with [the approved notation sheet from the 
     - [ ] `NOT` logical operator support (partial)[^2]
   - [x] Alternate statements
 - `loop` statements
-  - [ ] `while` loops
-  - [ ] `from/to` loops
+  - [x] `while` loops
+  - [x] `from/to` loops
 - I/O
   - [x] `output` statements
   - [x] `input` statements (im lazy ok?)
@@ -38,3 +38,7 @@ The grammar is written in accordance with [the approved notation sheet from the 
 [^1]: Instead of using `≠` as the not equal operator `!=` is being used for accessibility
 [^2]: Currently only one `AND` or `OR` operator can be used per condition, and one `NOT` operator per `>`, `<`, `>=`, `<=`, `!=` condition, since condition scoping has not been implemented yet.
 [^3]: Ellision is not implemented as it is not part of the spec (at least for now).
+
+
+## Transpiler
+Coming **Soon-ish™**.

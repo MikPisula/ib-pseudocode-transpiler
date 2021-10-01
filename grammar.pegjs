@@ -47,8 +47,14 @@ IfToken = "if"
 ThenToken = "then"
 ElseToken = "else"
 EndToken = "end"
+
 OutputToken = "output"
 InputToken = "input"
+
+WhileToken = "while"
+LoopToken = "loop"
+FromToken = "from"
+ToToken = "to"
 
 EqualToken = "="
 GreaterThanToken = ">" 
@@ -68,20 +74,44 @@ Statement
   = Assignment
   / MathematicalExpression
   / IfStatement
+  / WhileStatement
   / IOStatement
 
 
-  
+WhileStatement
+  = LoopToken _ WhileToken _ condition:Condition __
+    statements: Statements __
+    EndToken __ LoopToken {
+  	  return {
+      	type: "loopwhile",
+        condition,
+        statements
+      }
+    }
+    / LoopToken _ symbol:Symbol _ FromToken _ from:Factor _ ToToken _ to:Factor __
+    statements: Statements __
+    EndToken __ LoopToken {
+      return {
+      	type: "loopfromto",
+        symbol,
+        from,
+        to,
+        statements
+      }
+    }
+    
+
+// removed the EOS? btw
 IfStatement
   = IfToken _ condition:Condition _ ThenToken __
     consequent:Statements __
     ElseToken __ alternate:Statements __
-    EndToken __ IfToken EOS? {
+    EndToken __ IfToken {
       return {
-        "type": "ifstatement",
-        "condition": condition,
-        "consequent": consequent,
-        "alternate": alternate
+        type: "ifstatement",
+        condition,
+        consequent,
+        alternate
       }
     }
     / IfToken _ condition:Condition _ ThenToken __
