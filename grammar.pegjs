@@ -48,6 +48,7 @@ ThenToken = "then"
 ElseToken = "else"
 EndToken = "end"
 OutputToken = "output"
+InputToken = "input"
 
 EqualToken = "="
 GreaterThanToken = ">" 
@@ -67,7 +68,7 @@ Statement
   = Assignment
   / MathematicalExpression
   / IfStatement
-  / OutputStatement
+  / IOStatement
 
 
   
@@ -141,10 +142,22 @@ LogicalToken
 OutputStatement
   = OutputToken __ value:Value {
   	return {
-    	"type": "outputstatement",
-        "value": value
+    	type: "outputstatement",
+        value
 	}
   }
+  
+InputStatement
+  = InputToken __ symbol:Symbol {
+    return {
+    	type: "inputstatement",
+        symbol,
+    }
+  }
+  
+IOStatement
+  = OutputStatement
+  / InputStatement
 
 Assignment
   = __ symbol:Symbol __ EqualToken __ value:Value  {

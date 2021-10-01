@@ -29,7 +29,7 @@ The grammar is written in accordance with [the approved notation sheet from the 
   - [ ] `from/to` loops
 - I/O
   - [x] `output` statements
-  - [ ] `input` statements (im lazy ok?)
+  - [x] `input` statements (im lazy ok?)
 - Mathematical Expressions
   - [x] Additive & Multiplicative
   - [ ] Modulo
