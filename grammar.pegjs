@@ -189,6 +189,7 @@ MultiplicativeExpression
 Factor
   = "(" __ expr:MathematicalExpression __ ")" { return expr; }
   / Integer
+  / ArrayAccessExpression
   / Symbol
   
 
@@ -217,7 +218,9 @@ MathematicalValue
 */
 
 Value
-  = Symbol
+  = Array
+  / ArrayAccessExpression
+  / Symbol
   / MathematicalExpression
   / Integer
   / String
@@ -242,6 +245,35 @@ String "String"
   / "'" chars:SingleStringCharacter* "'" {
       return { type: "string", value: chars.join("") };
     }
+    
+Array "Array"
+  = "[" __ elements:ElementList? __ "]" {
+    return {
+      type: "array",
+      elements: elements || []
+    };
+  }
+
+ElementList
+  = head:(
+      element:Value {
+        return element;
+      }
+    )
+    tail:(
+      __ "," __ element:Value {
+        return element;
+      }
+    )* { return [].concat(head, tail); }
+    
+ArrayAccessExpression "ArrayAccessExpression"
+  = symbol:Symbol __ "[" __ index:MathematicalExpression __ "]" {
+  	return {
+		type: "arrayaccess",
+        symbol,
+        index
+	}
+  }
     
 SingleStringCharacter
  = !("'" / "\\" / LineTerminator) SourceCharacter { return text(); }

@@ -14,7 +14,8 @@ The grammar is written in accordance with [the approved notation sheet from the 
   - Assignable values
     - [x] Integers
     - [x] Strings
-    - [ ] Arrays
+    - [x] Arrays
+      - [ ] Elision [^3]
 - Comments
   - [x] Single line comments
 - `if` statements
@@ -36,3 +37,4 @@ The grammar is written in accordance with [the approved notation sheet from the 
 
 [^1]: Instead of using `≠` as the not equal operator `!=` is being used for accessibility
 [^2]: Currently only one `AND` or `OR` operator can be used per condition, and one `NOT` operator per `>`, `<`, `>=`, `<=`, `!=` condition, since condition scoping has not been implemented yet.
+[^3]: Ellision is not implemented as it is not part of the spec (at least for now).
