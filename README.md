@@ -14,13 +14,14 @@ The grammar is written in accordance with [the approved notation sheet from the 
   - Assignable values
     - [x] Integers
     - [x] Strings
+    - [ ] Arrays
 - Comments
   - [x] Single line comments
 - `if` statements
   - [ ] Conditions
-    - [x] `>`, `<`, `>=`, `<=`, `!=` conditions<sup>[1](#f1)</sup>
-    - [ ] `AND`, `OR` logical operator support (partial)<sup>[2](#f2)</sup>
-    - [ ] `NOT` logical operator support (partial)<sup>[2](#f2)</sup>
+    - [x] `>`, `<`, `>=`, `<=`, `!=` conditions[^1]
+    - [ ] `AND`, `OR` logical operator support (partial)[^2]
+    - [ ] `NOT` logical operator support (partial)[^2]
   - [x] Alternate statements
 - `loop` statements
   - [ ] `while` loops
@@ -29,8 +30,5 @@ The grammar is written in accordance with [the approved notation sheet from the 
   - [x] `output` statements
   - [ ] `input` statements (im lazy ok?)
 
----
-
-<sup id="f1">[1]</sup> Instead of using `≠` as the not equal operator `!=` is being used for accessibility
-
-<sup id="f2">[2]</sup> Currently only one `AND` or `OR` operator can be used per condition, and one `NOT` operator per `>`, `<`, `>=`, `<=`, `!=` condition, since condition scoping has not been implemented yet.
+[^1]: Instead of using `≠` as the not equal operator `!=` is being used for accessibility
+[^2]: Currently only one `AND` or `OR` operator can be used per condition, and one `NOT` operator per `>`, `<`, `>=`, `<=`, `!=` condition, since condition scoping has not been implemented yet.
