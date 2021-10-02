@@ -71,7 +71,8 @@ ModuloToken = "mod"
 QuotientToken = "div"
 
 Statement
-  = Assignment
+  = ArrayAssignment
+  / Assignment
   / MathematicalExpression
   / IfStatement
   / WhileStatement
@@ -190,12 +191,22 @@ IOStatement
   / InputStatement
 
 Assignment
-  = __ symbol:Symbol __ EqualToken __ value:Value  {
+  = symbol:Symbol __ EqualToken __ value:Value  {
     return {
         "type": "assignment",
         "into": symbol,
         "value": value
     }    
+  }
+  
+ArrayAssignment
+  = symbol:Symbol __ "[" __ index:MathematicalExpression __ "]" __ EqualToken __ value:Value {
+  	return {
+    	type: "arrayassignment",
+        symbol,
+        index,
+        value
+    }
   }
   
 MathematicalExpression
@@ -232,7 +243,7 @@ MultiplicativeExpression
 Factor
   = "(" __ expr:MathematicalExpression __ ")" { return expr; }
   / Integer
-  / ArrayAccessExpression
+  / ArrayAccess
   / Symbol
   
 
@@ -263,7 +274,7 @@ MathematicalValue
 Value
   = Array
   / MathematicalExpression
-  / ArrayAccessExpression
+  / ArrayAccess
   / Symbol
   / Integer
   / String
@@ -309,7 +320,7 @@ ElementList
       }
     )* { return [].concat(head, tail); }
     
-ArrayAccessExpression "ArrayAccessExpression"
+ArrayAccess "ArrayAccess"
   = symbol:Symbol __ "[" __ index:MathematicalExpression __ "]" {
   	return {
 		type: "arrayaccess",
