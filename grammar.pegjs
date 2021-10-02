@@ -116,12 +116,12 @@ IfStatement
     }
     / IfToken _ condition:Condition _ ThenToken __
     consequent:Statements __
-    EndToken _ IfToken EOS? {
+    EndToken _ IfToken {
       return {
-        "type": "ifstatement",
-        "condition": condition,
-        "consequent": consequent,
-        "alternate": null
+        type: "ifstatement",
+        condition,
+        consequent,
+        alternate: null
       }
     }
 
@@ -216,7 +216,7 @@ AdditiveExpression
   }
 
 MultiplicativeExpression
-  = head:Factor tail:(__ ("*" / "/") __ Factor)* {
+  = head:Factor tail:(__ ("*" / "/") __ Factor)+ {
     return {
       	type: "multiplicativeexpression",
         factors: [head].concat(tail.map(v => {
@@ -326,7 +326,7 @@ DoubleStringCharacter
 
 
 Program
-  = statements:Statements? __ {
+  = __ statements:Statements? __ {
     return {
         type: "program",
         statements: statements || []
