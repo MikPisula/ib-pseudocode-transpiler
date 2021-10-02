@@ -155,7 +155,7 @@ ConditionToken
 
   
 LogicalCondition "LogicalCondition"
-  = right:SimpleCondition __ token:LogicalToken __ left:SimpleCondition {
+  = left:SimpleCondition __ token:LogicalToken __ right:SimpleCondition {
 	return {
     	type: "logicalcondition",
         token,
@@ -216,7 +216,7 @@ AdditiveExpression
   }
 
 MultiplicativeExpression
-  = head:Factor tail:(__ ("*" / "/") __ Factor)+ {
+  = head:Factor tail:(__ ("*" / "/") __ Factor)* {
     return {
       	type: "multiplicativeexpression",
         factors: [head].concat(tail.map(v => {
@@ -262,9 +262,9 @@ MathematicalValue
 
 Value
   = Array
+  / MathematicalExpression
   / ArrayAccessExpression
   / Symbol
-  / MathematicalExpression
   / Integer
   / String
 

@@ -3,7 +3,7 @@ function inputstatement(resolvers, ast) {
 }
 
 function outputstatement(resolvers, ast) {
-    return `alert(${resolvers[ast.value.type](resolvers, ast.value)})`;
+    return `console.log(${resolvers[ast.value.type](resolvers, ast.value)})`;
 }
 
 module.exports = {

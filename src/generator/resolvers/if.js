@@ -26,10 +26,21 @@ function condition(resolvers, ast) {
     let left = resolvers[ast.left.type](resolvers, ast.left),
         right = resolvers[ast.right.type](resolvers, ast.right);
 
-    return `${ast.negation ? "!" : ""}(${left} ${token} ${right})`;
+    return `${ast.negation ? "!(" : ""}${left} ${token} ${right}${ast.negation ? ")" : ""}`;
+}
+
+const tokens = { "AND": "&&", "OR": "||" };
+
+function logicalcondition(resolvers, ast) {
+    let token = tokens[ast.token];
+    let left = resolvers[ast.left.type](resolvers, ast.left),
+        right = resolvers[ast.right.type](resolvers, ast.right);
+
+    return `(${left} ${token} ${right})`
 }
 
 module.exports = {
     ifstatement,
-    condition
+    condition,
+    logicalcondition
 }
