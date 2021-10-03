@@ -1,10 +1,11 @@
 # ib-pseudocode-transpiler
-[![Github License][license]](https://github.com/MikPisula/ib-pseudocode-transpiler/blob/main/LICENSE)
-<a href="https://github.com/MikPisula/ib-pseudocode-transpiler/blob/main/grammar.pegjs"><img src="https://forthebadge.com/images/badges/powered-by-black-magic.svg" height="28" /></a>
+[![Node.js CI](https://github.com/MikPisula/ib-pseudocode-transpiler/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/MikPisula/ib-pseudocode-transpiler/actions/workflows/node.js.yml)
+[![Github License](https://img.shields.io/github/license/MikPisula/ib-pseudocode-transpiler)](https://github.com/MikPisula/ib-pseudocode-transpiler/blob/main/LICENSE)
+![Lines of code](https://img.shields.io/tokei/lines/github/MikPisula/ib-pseudocode-transpiler)
 
-[license]: https://img.shields.io/github/license/MikPisula/ib-pseudocode-transpiler?style=for-the-badge
+Transpiles IB pseudocode into JavaScript. An early version of the transpiler is available at https://mikpisula.github.io/ib-pseudocode-transpiler.
 
-Transpiles IB pseudocode into JavaScript. **Note: This project is at a very early stage.**
+**Note: This project is at a very early stage.**
 
 ## Parser
 The grammar is written in accordance with [the approved notation sheet from the IB](https://computersciencewiki.org/images/3/3e/Approved_notation_for_developing_pseudocode.pdf).
@@ -38,7 +39,3 @@ The grammar is written in accordance with [the approved notation sheet from the 
 [^1]: Instead of using `≠` as the not equal operator `!=` is being used for accessibility
 [^2]: Currently only one `AND` or `OR` operator can be used per condition, and one `NOT` operator per `>`, `<`, `>=`, `<=`, `!=` condition, since condition scoping has not been implemented yet.
 [^3]: Ellision is not implemented as it is not part of the spec (at least for now).
-
-
-## Transpiler
-Coming **Soon-ish™**.
