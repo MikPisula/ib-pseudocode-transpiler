@@ -1,0 +1,14 @@
+// hello there
+X = 5 // testing comments
+
+if X <= 0 then // this is fine
+    if X < 0 then
+        output "X is smaller" // this is fine as well
+    else // but is this fine?!?!?!
+        output "X is equal to 0"
+    end if // yeah its all good
+else
+    output "X is larger than 0" // really no need to continue testing
+// really no need to continue testing
+end if
+// goodbye

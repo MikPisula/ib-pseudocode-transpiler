@@ -11,9 +11,10 @@ fs.readdirSync("./src/generator/resolvers/").forEach(name => {
  * Generates JavaScript
  * 
  * @param {object} ast - An Abstract Syntax Tree
+ * @param {object} options - Additional options
  */
-function generate(ast) {
-    return resolvers[ast.type](resolvers, ast);
+function generate(ast, options) {
+    return resolvers[ast.type](resolvers, ast, options);
 }
 
 module.exports = { generate };
