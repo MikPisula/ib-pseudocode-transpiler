@@ -34,7 +34,7 @@ function assignment(resolvers, ast) {
 }
 
 
-module.exports = {
+export default {
     symbol,
     integer,
     string,

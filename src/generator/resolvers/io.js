@@ -6,7 +6,7 @@ function outputstatement(resolvers, ast) {
     return `output(${resolvers[ast.value.type](resolvers, ast.value)})`;
 }
 
-module.exports = {
+export default {
     inputstatement,
     outputstatement
 }

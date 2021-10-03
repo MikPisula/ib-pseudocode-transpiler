@@ -10,7 +10,7 @@ function operation(resolvers, ast) {
     return ` ${ast.operator} ${resolvers[ast.value.type](resolvers, ast.value)}`;
 }
 
-module.exports = {
+export default {
     additiveexpression,
     multiplicativeexpression,
     operation

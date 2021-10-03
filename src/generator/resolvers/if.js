@@ -6,21 +6,8 @@ function ifstatement(resolvers, ast) {
 
     return `if (${condition}) {\n${consequent}} ${alternate ? `else {\n${alternate}}` : ""}`;
 }
-/*
-"condition": {
-    "type": "condition",
-    "token": "=",
-    "negation": false,
-    "left": {
-        "type": "symbol",
-        "name": "X"
-    },
-    "right": {
-        "type": "integer",
-        "value": 0
-    }
-},
-*/
+
+
 function condition(resolvers, ast) {
     let token = (ast.token == "=") ? "==" : ast.token;
     let left = resolvers[ast.left.type](resolvers, ast.left),
@@ -39,7 +26,7 @@ function logicalcondition(resolvers, ast) {
     return `(${left} ${token} ${right})`
 }
 
-module.exports = {
+export default {
     ifstatement,
     condition,
     logicalcondition

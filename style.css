@@ -1,0 +1,45 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    margin: 30px 10px 10px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+    margin: 10px;
+}
+
+.row textarea {
+    resize: none;
+    min-height: 80vh;
+    width: 100%;
+}
+
+.row textarea, .row button {
+    margin: 5px 0;
+}
+
+@media only screen and (max-width: 800px) {
+    .row {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+}

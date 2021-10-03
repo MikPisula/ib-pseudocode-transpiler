@@ -2,16 +2,20 @@
   "name": "ib-pseudocode-transpiler",
   "version": "1.0.0",
   "description": "",
-  "main": "",
+  "main": "./dist/cjs/index.js",
   "dependencies": {
     "peggy": "^1.2.0",
     "uglify-js": "^3.14.2"
   },
   "devDependencies": {
-    "mocha": "^9.1.2"
+    "mocha": "^9.1.2",
+    "rollup": "^2.58.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "build": "rollup -c && peggy -o ./dist/es/parser.js --format es grammar.pegjs"
   },
   "author": "MikPisula",
   "license": "MIT"

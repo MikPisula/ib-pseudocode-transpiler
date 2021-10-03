@@ -1,11 +1,9 @@
-const fs = require("fs");
+import res from "./resolvers";
 
 const resolvers = {};
-
-fs.readdirSync("./src/generator/resolvers/").forEach(name => {
-    let resolver = require(`./resolvers/${name}`);
-    Object.assign(resolvers, resolver);
-});
+for (let r in res) {
+    Object.assign(resolvers, res[r]);
+}
 
 /**
  * Generates JavaScript
@@ -17,4 +15,4 @@ function generate(ast, options) {
     return resolvers[ast.type](resolvers, ast, options);
 }
 
-module.exports = { generate };
+export default { generate };

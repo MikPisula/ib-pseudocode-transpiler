@@ -4,7 +4,7 @@ const fs = require("fs");
 
 const read = file => fs.readFileSync(file, "utf8");
 
-const transpiler = require("../src");
+const transpiler = require("../dist/cjs");
 
 describe("parser", function() {
     const parser = peggy.generate(read("grammar.pegjs"));

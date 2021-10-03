@@ -11,7 +11,7 @@ function loopfromto(resolvers, ast) {
     return `for (__vars["${ast.symbol.name}"] of __range(${resolvers[ast.to.type](resolvers, ast.to)}, ${resolvers[ast.from.type](resolvers, ast.from)})) {\n${statements}}\n`
 }
 
-module.exports = {
+export default {
     loopwhile,
     loopfromto
 }
