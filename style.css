@@ -3,7 +3,7 @@
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Noto Sans", sans-serif;
 }
 
 h1 {
@@ -25,14 +25,93 @@ h1 {
     margin: 10px;
 }
 
-.row textarea {
-    resize: none;
-    min-height: 80vh;
-    width: 100%;
+.CodeMirror {
+    border: 1px solid #ddd;
+    height: 80vh;
+    margin: 5px 0;
 }
 
-.row textarea, .row button {
+.io {
+    border: 1px solid #ddd;
+    resize: none;
+    height: 80vh;
     margin: 5px 0;
+    width: 100%;
+
+    font-family: Menlo, consolas ,monospace;
+    font-size: .85rem;
+
+    overflow-y: scroll;
+}
+
+.io .line {
+    line-height: 1.4rem;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+
+.io .line.error {
+    background-color: #ffefef;
+    color: #f44336;
+}
+
+.line .text {
+    display: flex;
+    max-width: 100%;
+    position: relative;
+    padding: .6rem;
+    padding-left: 1.4rem;
+}
+
+.line.in::before, .line.error::before {
+    position: absolute;
+    font-weight: bold;
+
+    top: .55rem;
+    left: .5rem;
+    width: 12px;
+    height: 12px;
+}
+
+.line.error::before {
+    content: "x";
+}
+
+.line.in::before {
+    content: ">";
+}
+
+.io .input textarea {
+    resize: none;
+    background: none;
+    font-family: Menlo,consolas,monospace;
+    border: 0;
+    padding: .7rem 0 0;
+    padding-left: 1.4rem;
+    display: block;
+    width: 100%;
+    outline: none;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.io .input {
+    display: block;
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid #eee;
+}
+
+.input {
+    position: relative;
+}
+
+.input .run {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    padding: 4px 16px;
+    z-index: 25;
 }
 
 @media only screen and (max-width: 800px) {

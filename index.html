@@ -6,24 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transpiler</title>
 
-    <link rel="stylesheet" href="style.css">
+    <script src="./codemirror-5.63.1/lib/codemirror.js"></script>
+    <script src="./codemirror-5.63.1/addon/mode/simple.js"></script>
+    <link rel="stylesheet" href="./codemirror-5.63.1/lib/codemirror.css">
 
+    <script>var _=function(){function e(t){return this instanceof e?(t&&(window._cache.tags[t]||(window._cache.tags[t]=document.querySelector(t)),null===window._cache.tags[t]?console.warn(`selector '${t}' not found.`):(this[0]=window._cache.tags[t],this.length=1)),this):new e(t)}window._cache={},window._cache.tags={};var t,n;return t="element",n={get(){return this[0]}},Object.defineProperty(e.prototype,t,n),e.prototype.length=0,e.prototype.splice=[].splice,e}();</script>
+    
     <script src="./dist/es/uglifyjs.js"></script>
+
+    <link rel="stylesheet" href="style.css">
     <script src="script.js" type="module" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>IB Pseudocode Transpiler</h1>
     <div class="wrapper">
         <div class="row">
             <div class="column">
-                <div class="">
+                <div class="input">
                     <textarea name="input" id="input"></textarea>
-                    <button id="run">Run</button>
+                    <button class="run" id="run">Run</button>
                 </div>
             </div>
             <div class="column">
-                <div>
-                    <textarea name="error" id="error" readonly></textarea>
+                <div class="io" id="io">
+                    <div class="output" id="output"></div>
                 </div>
             </div>
         </div>

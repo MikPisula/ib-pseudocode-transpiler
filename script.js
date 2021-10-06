@@ -1,6 +1,6 @@
 import transpiler from "./dist/es/index.js";
 
-document.querySelector("#input").value = `
+_("#input").element.value = `
 input X
 S = 1
 
@@ -12,95 +12,118 @@ end loop
 output S
 `.trim();
 
-document.querySelector("#run").addEventListener("click", () => {
-    try {
-        let code = transpiler.transpile(document.querySelector("#input").value);
-        document.querySelector("#error").value = "";
-        eval(`(${code})();`);
-    } catch (e) {
-        document.querySelector("#error").value = e;
-        throw e;
+CodeMirror.defineSimpleMode("ib", {
+    start: [
+      {regex: /"(?:[^\\]|\\.)*?(?:"|$)/, token: "string"},
+      {regex: /'(?:[^\\]|\\.)*?(?:'|$)/, token: "string"},
+
+      {regex: /(?:if|while|else|then|end|loop|from|to|output|input)/, token: "keyword"},
+      {regex: /(?:AND|NOT|OR)/, token: "atom"},
+
+      {regex: /[0-9]+/, token: "number"},
+      {regex: /\/\/.*/, token: "comment"},
+
+      {regex: /[-+\/*=<>!]+/, token: "operator"},
+      {regex: /[A-Z]+/, token: "variable"},
+    ],
+
+    meta: {
+      lineComment: "//"
     }
-})
-
-// import transpiler from "../../dist/es/index.js";
-// import codemirror from "codemirror";
-// import mode from "";
-
-// console.log(mode)
-
-// document.querySelector("#input").value = `
-// input X
-// S = 1
-
-// loop while X != 0
-//     S = S * X
-//     X = X - 1
-// end loop
-
-// output S
-// `.trim();
-
-// codemirror.defineSimpleMode("simplemode", {
-//     // The start state contains the rules that are initially used
-//     start: [
-//       // The regex matches the token, the token property contains the type
-//       {regex: /"(?:[^\\]|\\.)*?(?:"|$)/, token: "string"},
-//       // You can match multiple tokens at once. Note that the captured
-//       // groups must span the whole string in this case
-//       {regex: /(function)(\s+)([a-z$][\w$]*)/,
-//        token: ["keyword", null, "variable-2"]},
-//       // Rules are matched in the order in which they appear, so there is
-//       // no ambiguity between this one and the one above
-//       {regex: /(?:function|var|return|if|for|while|else|do|this)\b/,
-//        token: "keyword"},
-//       {regex: /true|false|null|undefined/, token: "atom"},
-//       {regex: /0x[a-f\d]+|[-+]?(?:\.\d+|\d+\.?\d*)(?:e[-+]?\d+)?/i,
-//        token: "number"},
-//       {regex: /\/\/.*/, token: "comment"},
-//       {regex: /\/(?:[^\\]|\\.)*?\//, token: "variable-3"},
-//       // A next property will cause the mode to move to a different state
-//       {regex: /\/\*/, token: "comment", next: "comment"},
-//       {regex: /[-+\/*=<>!]+/, token: "operator"},
-//       // indent and dedent properties guide autoindentation
-//       {regex: /[\{\[\(]/, indent: true},
-//       {regex: /[\}\]\)]/, dedent: true},
-//       {regex: /[a-z$][\w$]*/, token: "variable"},
-//       // You can embed other modes with the mode property. This rule
-//       // causes all code between << and >> to be highlighted with the XML
-//       // mode.
-//       {regex: /<</, token: "meta", mode: {spec: "xml", end: />>/}}
-//     ],
-//     // The multi-line comment state.
-//     comment: [
-//       {regex: /.*?\*\//, token: "comment", next: "start"},
-//       {regex: /.*/, token: "comment"}
-//     ],
-//     // The meta property contains global information about the mode. It
-//     // can contain properties like lineComment, which are supported by
-//     // all modes, and also directives like dontIndentStates, which are
-//     // specific to simple modes.
-//     meta: {
-//       dontIndentStates: ["comment"],
-//       lineComment: "//"
-//     }
-//   });
+  });
   
 
-// let editor = codemirror.fromTextArea(document.querySelector("#input"), {
-//     lineNumbers: true,
-//     mode: "simplemode"
-// });
+let editor = CodeMirror.fromTextArea(_("#input")[0], {
+    lineNumbers: true,
+    mode: "ib"
+})
 
-// console.log(editor);
 
-// document.querySelector("#run").addEventListener("click", () => {
+let old = "",
+    parseTimer = null;
+
+function schedule() {
+    console.log("schedule")
+    if (editor.getValue() == old) return 
+
+    if (parseTimer !== null) {
+        clearTimeout(parseTimer);
+        parseTimer = null;
+    }
+
+    parseTimer = setTimeout(() => {
+        old = editor.getValue();
+
+        try {
+            let output = transpiler.transpile(old, {
+                debug: true,
+                output: x => {
+                    _("#output")[0].innerHTML += `<div class="line"><div class="text">${x}</div></div>`;
+                    _("#io")[0].scrollTop = _("#io")[0].scrollHeight;
+                },
+                input: () => {
+                    let x = prompt();
+                    _("#output")[0].innerHTML += `<div class="line in"><div class="text">${x}</div></div>`;
+                    _("#io")[0].scrollTop = _("#io")[0].scrollHeight;
+
+                    return parseInt(x);
+                }
+            });
+            eval(`(${output})();`);
+
+        } catch (e) {
+            throw e;
+        }
+
+
+        parseTimer = null;
+    }, 500);
+}
+
+const scroll = () => _("#io")[0].scrollTop = _("#io")[0].scrollHeight;
+
+_("#run")[0].onclick = () => {
+    try {
+        let output = transpiler.transpile(editor.getValue(), {
+            debug: true,
+            output: x => {
+                _("#output")[0].innerHTML += `<div class="line"><div class="text">${x}</div></div>`;
+                scroll();
+            },
+            input: () => {
+                let x = prompt("input:");
+                _("#output")[0].innerHTML += `<div class="line in"><div class="text">${x}</div></div>`;
+                scroll();
+
+                return parseInt(x);
+            }
+        });
+        eval(`(${output})();`);
+
+    } catch (e) {
+        _("#output")[0].innerHTML += `<div class="line error"><div class="text">${e}</div></div>`;
+        scroll();
+    }
+}
+
+window.addEventListener("beforeunload", (e) => {
+    editor.save();
+
+    e.preventDefault();
+    e.returnValue = "";
+});
+
+// editor.on("change", schedule);
+
+
+//   _("#run").element.onclick = () => {
 //     try {
-//         let code = transpiler.transpile(document.querySelector("#input").value);
-//         document.querySelector("#error").value = "";
+//         let code = transpiler.transpile(editor.value());
+//         _("#error").element.value = "";
+
 //         eval(`(${code})();`);
 //     } catch (e) {
-//         document.querySelector("#error").value = e;
+//         _("#error").element.value = e;
 //         throw e;
 //     }
-// })
+// }
