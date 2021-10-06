@@ -50,6 +50,25 @@ describe("parser", function() {
             lines.map((line, index) => {
                 it(`test${index+1}`, () => assert.deepStrictEqual(line, 69));
             })
+
+
+            lines = [];
+
+            program = transpiler.transpile(`
+                X = 23
+                Y = 3
+
+                output 2 mod 2
+                output (6 * 6) mod 2 + 2
+                output (2 * 3) mod (2 * 3)
+                output (2 * 3) div (2 * 3)
+                output 3 div 4
+                output 23 mod 6
+            `, { debug: true, output: x => lines.push(x) });
+
+            eval(`(${program})();`);
+
+            it(`modulo & quotient`, () => assert.deepStrictEqual(lines, [0, 2, 0, 1, 0, 5]));
         })
     })
 })

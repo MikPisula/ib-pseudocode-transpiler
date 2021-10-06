@@ -33,8 +33,8 @@ The grammar is written in accordance with [the approved notation sheet from the 
   - [x] `input` statements (im lazy ok?)
 - Mathematical Expressions
   - [x] Additive & Multiplicative
-  - [ ] Modulo
-  - [ ] Quotient
+  - [x] Modulo
+  - [x] Quotient
 
 [^1]: Instead of using `≠` as the not equal operator `!=` is being used for accessibility
 [^2]: Currently only one `AND` or `OR` operator can be used per condition, and one `NOT` operator per `>`, `<`, `>=`, `<=`, `!=` condition, since condition scoping has not been implemented yet.
