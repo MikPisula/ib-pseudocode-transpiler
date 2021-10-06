@@ -4,6 +4,7 @@
   "description": "",
   "main": "./dist/cjs/index.js",
   "dependencies": {
+    "codemirror": "^5.63.1",
     "peggy": "^1.2.0",
     "uglify-js": "^3.14.2"
   },
@@ -11,11 +12,12 @@
     "mocha": "^9.1.2",
     "rollup": "^2.58.0",
     "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0"
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-string": "^3.0.0"
   },
   "scripts": {
     "test": "mocha",
-    "build": "rollup -c && peggy -o ./dist/es/parser.js --format es grammar.pegjs"
+    "build": "rollup -c && peggy -o ./dist/es/parser.js --format es grammar.pegjs && uglifyjs ./dist/es/parser.js -o ./dist/es/parser.js"
   },
   "author": "MikPisula",
   "license": "MIT"
