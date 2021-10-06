@@ -209,11 +209,31 @@ ArrayAssignment
     }
   }
   
+  
 MathematicalExpression
-  = AdditiveExpression / MultiplicativeExpression
+  = Modulo / Quotient / AdditiveExpression / MultiplicativeExpression
+  
+Modulo
+  = left:AdditiveExpression __ ModuloToken __ right:AdditiveExpression {
+  	return {
+    	type: "modulo",
+        left,
+        right
+    }
+  }
+  
+Quotient
+  = left:AdditiveExpression __ QuotientToken __ right:AdditiveExpression {
+  	return {
+    	type: "quotient",
+        left,
+        right
+    }
+  }
+  
   
 AdditiveExpression
-  = head:MultiplicativeExpression tail:(__ ("+" / "-") __ MultiplicativeExpression)* {
+  = head:Term tail:(__ ("+" / "-") __ Term)* {
     return {
       	type: "additiveexpression",
         terms: [head].concat(tail.map(v => {
@@ -225,6 +245,9 @@ AdditiveExpression
 		}))
     }
   }
+
+Term
+  = MultiplicativeExpression
 
 MultiplicativeExpression
   = head:Factor tail:(__ ("*" / "/") __ Factor)* {
@@ -246,30 +269,6 @@ Factor
   / ArrayAccess
   / Symbol
   
-
-/*
-Mod
-  = left:MathematicalValue __ ModuloToken __ right:MathematicalValue {
-  	return {
-    	type: "quotient",
-        left,
-        right
-    }
-  }
-  
-Quotient
-  = left:MathematicalValue __ QuotientToken __ right:MathematicalValue {
-  	return {
-    	type: "remainder",
-        left,
-        right
-    }
-  }
-  
-MathematicalValue
-  = Integer
-  / Symbol
-*/
 
 Value
   = Array

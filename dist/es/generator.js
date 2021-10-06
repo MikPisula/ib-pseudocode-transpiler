@@ -75,10 +75,20 @@ function operation(resolvers, ast) {
     return ` ${ast.operator} ${resolvers[ast.value.type](resolvers, ast.value)}`;
 }
 
+function quotient(resolvers, ast) {
+    return `Math.floor(${resolvers[ast.left.type](resolvers, ast.left)} / ${resolvers[ast.right.type](resolvers, ast.right)})`
+}
+
+function modulo(resolvers, ast) {
+    return `(${resolvers[ast.left.type](resolvers, ast.left)} % ${resolvers[ast.right.type](resolvers, ast.right)})`
+}
+
 var math = {
     additiveexpression,
     multiplicativeexpression,
-    operation
+    operation,
+    quotient,
+    modulo
 };
 
 var runtime = "/* RUNTIME BEGIN */\r\n\r\nvar __vars = {};\r\nfunction __var(name, index = null) {\r\n    if (__vars[name] === undefined) __vars[name] = 0;\r\n    if (Array.isArray(__vars[name]) && index !== null) {\r\n        if (__vars[name][index] === undefined) __vars[name][index] = 0;\r\n        return __vars[name][index];\r\n    }\r\n\r\n    return __vars[name];\r\n}\r\nfunction __range(size, startAt = 0) {\r\n    return [...Array(size).keys()].map(i => i + startAt);\r\n}\r\n\r\n/* IO */\r\n\r\n/* RUNTIME END */";
