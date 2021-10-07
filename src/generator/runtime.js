@@ -11,7 +11,7 @@ function __var(name, index = null) {
     return __vars[name];
 }
 function __range(size, startAt = 0) {
-    return [...Array(size).keys()].map(i => i + startAt);
+    return [...Array(size - startAt).keys()].map(i => i + startAt);
 }
 
 /* IO */
