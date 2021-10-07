@@ -91,7 +91,7 @@ var math = {
     modulo
 };
 
-var runtime = "/* RUNTIME BEGIN */\r\n\r\nvar __vars = {};\r\nfunction __var(name, index = null) {\r\n    if (__vars[name] === undefined) __vars[name] = 0;\r\n    if (Array.isArray(__vars[name]) && index !== null) {\r\n        if (__vars[name][index] === undefined) __vars[name][index] = 0;\r\n        return __vars[name][index];\r\n    }\r\n\r\n    return __vars[name];\r\n}\r\nfunction __range(size, startAt = 0) {\r\n    return [...Array(size).keys()].map(i => i + startAt);\r\n}\r\n\r\n/* IO */\r\n\r\n/* RUNTIME END */";
+var runtime = "/* RUNTIME BEGIN */\r\n\r\nvar __vars = {};\r\nfunction __var(name, index = null) {\r\n    if (__vars[name] === undefined) __vars[name] = 0;\r\n    if (Array.isArray(__vars[name]) && index !== null) {\r\n        if (__vars[name][index] === undefined) __vars[name][index] = 0;\r\n        return __vars[name][index];\r\n    }\r\n\r\n    return __vars[name];\r\n}\r\nfunction __range(size, startAt = 0) {\r\n    return [...Array(size - startAt).keys()].map(i => i + startAt);\r\n}\r\n\r\n/* IO */\r\n\r\n/* RUNTIME END */";
 
 function program(resolvers, ast, options) {
     let r = runtime.replace("/* IO */", `const output = ${options.output.toString()};\nconst input = ${options.input.toString()};`);
