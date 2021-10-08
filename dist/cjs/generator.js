@@ -85,12 +85,17 @@ function modulo(resolvers, ast) {
     return `(${resolvers[ast.left.type](resolvers, ast.left)} % ${resolvers[ast.right.type](resolvers, ast.right)})`
 }
 
+function postfixoperation(resolvers, ast) {
+    return `__vars["${ast.symbol.name}"] = ${resolvers[ast.symbol.type](resolvers, ast.symbol)} ${ast.operator.slice(0,1)} 1`
+}
+
 var math = {
     additiveexpression,
     multiplicativeexpression,
     operation,
     quotient,
-    modulo
+    modulo,
+    postfixoperation
 };
 
 var runtime = "/* RUNTIME BEGIN */\r\n\r\nvar __vars = {};\r\nfunction __var(name, index = null) {\r\n    if (__vars[name] === undefined) __vars[name] = 0;\r\n    if (Array.isArray(__vars[name]) && index !== null) {\r\n        if (__vars[name][index] === undefined) __vars[name][index] = 0;\r\n        return __vars[name][index];\r\n    }\r\n\r\n    return __vars[name];\r\n}\r\nfunction __range(size, startAt = 0) {\r\n    return [...Array(size - startAt).keys()].map(i => i + startAt);\r\n}\r\n\r\n/* IO */\r\n\r\n/* RUNTIME END */";
