@@ -64,11 +64,38 @@ describe("parser", function() {
                 output (2 * 3) div (2 * 3)
                 output 3 div 4
                 output 23 mod 6
-            `, { debug: true, output: x => lines.push(x) });
+            `, { debug: false, output: x => lines.push(x) });
 
             eval(`(${program})();`);
 
             it(`modulo & quotient`, () => assert.deepStrictEqual(lines, [0, 2, 0, 1, 0, 5]));
+        })
+
+        describe("postfix operations" , function() {
+            let lines = [];
+
+            let program = transpiler.transpile(`
+                X = 23
+                Y = 3
+
+                X++
+                output X
+                X--
+                X--
+                Y++
+                X--
+                output X
+                output Y++
+                Y--
+                outputY
+                Z++
+                output Z
+                output SHITE--
+            `, { debug: false, output: x => lines.push(x) });
+
+            eval(`(${program})();`);
+
+            it(`test1`, () => assert.deepStrictEqual(lines, [24, 21, 5, 4, 1, -1]));
         })
     })
 })

@@ -73,6 +73,7 @@ QuotientToken = "div"
 Statement
   = ArrayAssignment
   / Assignment
+  / PostfixOperation
   / MathematicalExpression
   / IfStatement
   / WhileStatement
@@ -272,6 +273,7 @@ Factor
 
 Value
   = Array
+  / PostfixOperation
   / MathematicalExpression
   / ArrayAccess
   / Symbol
@@ -279,7 +281,7 @@ Value
   / String
 
 Symbol "Symbol"
-  = name:[A-Z]+ {
+  = name:[A-Z_0-9]+ {
     return {
     	type: "symbol",
     	name: name.join("")
@@ -327,6 +329,18 @@ ArrayAccess "ArrayAccess"
         index
 	}
   }
+  
+PostfixOperation "PostfixOperation"
+  = symbol:Symbol __ operator:PostfixOperator {
+  	return {
+    	type: "postfixoperation",
+        symbol: symbol,
+        operator: operator
+    }
+  }
+  
+PostfixOperator "PostfixOperator"
+  = operator:("--" / "++") { return operator }
     
 SingleStringCharacter
  = !("'" / "\\" / LineTerminator) SourceCharacter { return text(); }

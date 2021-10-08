@@ -18,10 +18,15 @@ function modulo(resolvers, ast) {
     return `(${resolvers[ast.left.type](resolvers, ast.left)} % ${resolvers[ast.right.type](resolvers, ast.right)})`
 }
 
+function postfixoperation(resolvers, ast) {
+    return `__vars["${ast.symbol.name}"] = ${resolvers[ast.symbol.type](resolvers, ast.symbol)} ${ast.operator.slice(0,1)} 1`
+}
+
 export default {
     additiveexpression,
     multiplicativeexpression,
     operation,
     quotient,
-    modulo
+    modulo,
+    postfixoperation
 }
