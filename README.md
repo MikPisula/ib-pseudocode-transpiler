@@ -2,6 +2,7 @@
 [![Node.js CI](https://github.com/MikPisula/ib-pseudocode-transpiler/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/MikPisula/ib-pseudocode-transpiler/actions/workflows/node.js.yml)
 [![Github License](https://img.shields.io/github/license/MikPisula/ib-pseudocode-transpiler)](https://github.com/MikPisula/ib-pseudocode-transpiler/blob/main/LICENSE)
 ![Lines of code](https://img.shields.io/tokei/lines/github/MikPisula/ib-pseudocode-transpiler)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/MikPisula/ib-pseudocode-transpiler.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/MikPisula/ib-pseudocode-transpiler/alerts/)
 
 Transpiles IB pseudocode into JavaScript. An online version is available at https://mikpisula.github.io/ib-pseudocode-transpiler.
 
