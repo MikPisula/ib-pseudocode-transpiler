@@ -22,8 +22,9 @@ CodeMirror.defineSimpleMode("ib", {
 
       {regex: /[0-9]+/, token: "number"},
       {regex: /\/\/.*/, token: "comment"},
-
+      
       {regex: /[-+\/*=<>!]+/, token: "variable-2"},
+      {regex: /(?:mod|div)/, token: "variable-2"},
       {regex: /[A-Z_0-9]+/, token: "variable"},
     ],
 
