@@ -1,4 +1,5 @@
 import transpiler from "./dist/es/index.js";
+let runs = 0;
 
 _("#input").element.value = `
 input X
@@ -85,6 +86,8 @@ const scroll = () => _("#io")[0].scrollTop = _("#io")[0].scrollHeight;
 
 _("#run")[0].onclick = () => {
     try {
+        _(`#output`)[0].innerHTML = "";
+        
         let output = transpiler.transpile(editor.getValue(), {
             debug: true,
             output: x => {
@@ -99,7 +102,22 @@ _("#run")[0].onclick = () => {
                 return parseInt(x);
             }
         });
+        
+        _("#output")[0].innerHTML += `<div class="line run" id="running"><div class="text">Running...</div></div>`;
+        _("#io")[0].scrollTop = _("#io")[0].scrollHeight;
+        
+        let b = performance.now();
         eval(`(${output})();`);
+        let a = performance.now();
+
+        
+        let running = document.querySelector("#running");
+        console.log(running.children[0]);
+
+        running.children[0].innerText = `Run ${runs++}: Evaluated in ${a - b}ms`;
+        running.classList.add("success");
+        running.id = "";
+
 
     } catch (e) {
         _("#output")[0].innerHTML += `<div class="line error"><div class="text">${e}</div></div>`;

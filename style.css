@@ -55,6 +55,16 @@ h1 {
     color: #f44336;
 }
 
+.io .line.run {
+    background-color: #fffbe5;
+    color: #6b4d15;
+}
+
+.io .line.run.success {
+    background-color: #eaffe5;
+    color: #1f5811;
+}
+
 .line .text {
     display: flex;
     max-width: 100%;
@@ -63,7 +73,7 @@ h1 {
     padding-left: 1.4rem;
 }
 
-.line.in::before, .line.error::before {
+.line.in::before, .line.error::before, .line.run::before {
     position: absolute;
     font-weight: bold;
 
@@ -79,6 +89,10 @@ h1 {
 
 .line.in::before {
     content: ">";
+}
+
+.line.run::before {
+    content: "<";
 }
 
 .io .input textarea {
