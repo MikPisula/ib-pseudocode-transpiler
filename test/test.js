@@ -43,6 +43,7 @@ describe("parser", function() {
                 output 169 - 150 + 50 - 3 + Y
                 output 3 + 2 * 2 + 2 + 6 * 9 + 6
                 output X * Y
+                output (Y + 20) * 3
             `, { debug: false, output: x => lines.push(x) });
 
             eval(`(${program})();`);
@@ -68,7 +69,7 @@ describe("parser", function() {
 
             eval(`(${program})();`);
 
-            it(`modulo & quotient`, () => assert.deepStrictEqual(lines, [0, 2, 0, 1, 0, 5]));
+            it(`modulo & quotient`, () => assert.deepStrictEqual(lines, [0, 0, 0, 1, 0, 5]));
         })
 
         describe("postfix operations" , function() {
