@@ -212,10 +212,10 @@ ArrayAssignment
   
   
 MathematicalExpression
-  = Modulo / Quotient / AdditiveExpression / MultiplicativeExpression
+  = AdditiveExpression / MultiplicativeExpression
   
 Modulo
-  = left:AdditiveExpression __ ModuloToken __ right:AdditiveExpression {
+  = left:Factor __ ModuloToken __ right:Factor {
   	return {
     	type: "modulo",
         left,
@@ -224,7 +224,7 @@ Modulo
   }
   
 Quotient
-  = left:AdditiveExpression __ QuotientToken __ right:AdditiveExpression {
+  = left:Factor __ QuotientToken __ right:Factor {
   	return {
     	type: "quotient",
         left,
@@ -248,7 +248,7 @@ AdditiveExpression
   }
 
 Term
-  = MultiplicativeExpression
+  = Modulo / Quotient / MultiplicativeExpression
 
 MultiplicativeExpression
   = head:Factor tail:(__ ("*" / "/") __ Factor)* {

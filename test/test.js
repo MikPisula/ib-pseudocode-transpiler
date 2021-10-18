@@ -69,7 +69,7 @@ describe("parser", function() {
 
             eval(`(${program})();`);
 
-            it(`modulo & quotient`, () => assert.deepStrictEqual(lines, [0, 0, 0, 1, 0, 5]));
+            it(`modulo & quotient`, () => assert.deepStrictEqual(lines, [0, 2, 0, 1, 0, 5]));
         })
 
         describe("postfix operations" , function() {
