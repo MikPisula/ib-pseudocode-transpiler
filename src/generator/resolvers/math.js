@@ -1,5 +1,5 @@
 function additiveexpression(resolvers, ast) {
-    return `${resolvers.statements(resolvers, ast.terms)}`.split("\n").join("");
+    return `(${resolvers.statements(resolvers, ast.terms)})`.split("\n").join("");
 }
 
 function multiplicativeexpression(resolvers, ast) {
