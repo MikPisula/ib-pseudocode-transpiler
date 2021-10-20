@@ -41,47 +41,6 @@ let editor = CodeMirror.fromTextArea(_("#input")[0], {
 })
 
 
-let old = "",
-    parseTimer = null;
-
-function schedule() {
-    console.log("schedule")
-    if (editor.getValue() == old) return 
-
-    if (parseTimer !== null) {
-        clearTimeout(parseTimer);
-        parseTimer = null;
-    }
-
-    parseTimer = setTimeout(() => {
-        old = editor.getValue();
-
-        try {
-            let output = transpiler.transpile(old, {
-                debug: true,
-                output: x => {
-                    _("#output")[0].innerHTML += `<div class="line"><div class="text">${x}</div></div>`;
-                    _("#io")[0].scrollTop = _("#io")[0].scrollHeight;
-                },
-                input: () => {
-                    let x = prompt();
-                    _("#output")[0].innerHTML += `<div class="line in"><div class="text">${x}</div></div>`;
-                    _("#io")[0].scrollTop = _("#io")[0].scrollHeight;
-
-                    return parseInt(x);
-                }
-            });
-            eval(`(${output})();`);
-
-        } catch (e) {
-            throw e;
-        }
-
-
-        parseTimer = null;
-    }, 500);
-}
-
 const scroll = () => _("#io")[0].scrollTop = _("#io")[0].scrollHeight;
 
 _("#run")[0].onclick = () => {
@@ -91,7 +50,7 @@ _("#run")[0].onclick = () => {
         let output = transpiler.transpile(editor.getValue(), {
             debug: true,
             output: x => {
-                _("#output")[0].innerHTML += `<div class="line"><div class="text">${x}</div></div>`;
+                _("#output")[0].innerHTML += `<div class="line"><div class="text">${x.map(v => v.toString()).join("")}</div></div>`;
                 scroll();
             },
             input: () => {
