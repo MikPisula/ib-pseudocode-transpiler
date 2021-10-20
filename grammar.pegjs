@@ -172,13 +172,22 @@ LogicalToken
 
     
 OutputStatement
-  = OutputToken __ value:Value {
+  = OutputToken __ head:Value tail:(__ "," __ Value)* {
   	return {
     	type: "outputstatement",
-        value
+        values: [head].concat(tail.map(v => v[3]))
 	}
   }
   
+/*
+        factors: [head].concat(tail.map(v => {
+			return {
+            	type: "operation",
+            	operator: v[1],
+                value: v[3]
+            }
+		}))
+*/
 InputStatement
   = InputToken __ symbol:Symbol {
     return {
