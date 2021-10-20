@@ -3,7 +3,7 @@ function inputstatement(resolvers, ast) {
 }
 
 function outputstatement(resolvers, ast) {
-    return `output(${resolvers[ast.value.type](resolvers, ast.value)})`;
+    return `output([${ast.values.map(v => resolvers[v.type](resolvers, v)).join(", ")}])`;
 }
 
 export default {

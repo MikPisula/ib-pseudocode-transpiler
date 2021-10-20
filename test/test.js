@@ -44,7 +44,10 @@ describe("parser", function() {
                 output 3 + 2 * 2 + 2 + 6 * 9 + 6
                 output X * Y
                 output (Y + 20) * 3
-            `, { debug: false, output: x => lines.push(x) });
+
+                Y = X
+                output Y * 3
+            `, { debug: true, output: x => lines.push(...x) });
 
             eval(`(${program})();`);
 
@@ -65,7 +68,7 @@ describe("parser", function() {
                 output (2 * 3) div (2 * 3)
                 output 3 div 4
                 output 23 mod 6
-            `, { debug: false, output: x => lines.push(x) });
+            `, { debug: false, output: x => lines.push(...x) });
 
             eval(`(${program})();`);
 
@@ -92,7 +95,7 @@ describe("parser", function() {
                 Z++
                 output Z
                 output SHITE--
-            `, { debug: false, output: x => lines.push(x) });
+            `, { debug: false, output: x => lines.push(...x) });
 
             eval(`(${program})();`);
 
