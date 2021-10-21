@@ -47,7 +47,7 @@ describe("parser", function() {
 
                 Y = X
                 output Y * 3
-            `, { debug: true, output: x => lines.push(...x) });
+            `, { debug: false, output: x => lines.push(...x) });
 
             eval(`(${program})();`);
 
@@ -101,5 +101,42 @@ describe("parser", function() {
 
             it(`test1`, () => assert.deepStrictEqual(lines, [24, 21, 5, 4, 1, -1]));
         })
+    })
+
+    describe("io", function() {
+        let lines = [];
+        let expected = [
+            [ 21 ],
+            [ '32' ],
+            [ 'hello there' ],
+            [ 69 ],
+            [ 'hello there', 'oof' ],
+            [ [ 1, 2, 3 ] ],
+            [ 3 ],
+            [ [ 1, 2, 3, 4 ] ]
+        ];
+
+        let program = transpiler.transpile(`
+            X = "oof"
+
+            output 21
+            output "32"
+            output "hello there"
+            output 23 * 3
+
+            output "hello there", X
+
+            X = [1,2,3]
+
+            output X
+            output X[2]
+            output [1,2,3,4]
+        `, { debug: false, output: x => lines.push(x) });
+
+        
+        eval(`(${program})();`);
+        console.log(lines)
+
+        it(`test1`, () => assert.deepStrictEqual(lines, expected));
     })
 })
