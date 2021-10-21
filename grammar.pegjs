@@ -55,6 +55,7 @@ WhileToken = "while"
 LoopToken = "loop"
 FromToken = "from"
 ToToken = "to"
+UntilToken = "until"
 
 EqualToken = "="
 GreaterThanToken = ">" 
@@ -101,7 +102,15 @@ WhileStatement
         statements
       }
     }
-    
+    / LoopToken _ UntilToken _ condition:Condition __
+    statements: Statements __
+    EndToken __ LoopToken {
+  	  return {
+      	type: "loopuntil",
+        condition,
+        statements
+      }
+    }
 
 // removed the EOS? btw
 IfStatement
