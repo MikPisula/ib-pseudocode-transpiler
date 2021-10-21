@@ -64,7 +64,7 @@ function loopuntil(resolvers, ast) {
     let condition = resolvers[ast.condition.type](resolvers, ast.condition);
     let statements = resolvers.statements(resolvers, ast.statements);
 
-    return `while (!${condition}) {\n${statements}}\n`
+    return `while (!(${condition})) {\n${statements}}\n`
 }
 
 var loop = {

@@ -34,6 +34,7 @@ The grammar is written in accordance with [the approved notation sheet from the 
 - `loop` statements
   - [x] `while` loops
   - [x] `from/to` loops
+  - [x] `until` loops
 - I/O
   - [x] `output` statements
     - [x] format strings
