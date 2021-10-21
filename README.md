@@ -36,6 +36,7 @@ The grammar is written in accordance with [the approved notation sheet from the 
   - [x] `from/to` loops
 - I/O
   - [x] `output` statements
+    - [x] format strings
   - [x] `input` statements
 - Mathematical Expressions
   - [x] Additive & Multiplicative
