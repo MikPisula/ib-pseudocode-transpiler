@@ -25,7 +25,7 @@ The grammar is written in accordance with [the approved notation sheet from the 
 - Comments
   - [x] Single line comments
 - `if` statements
-  - [ ] `elif` operator [^3]
+  - [x] `else if` operator [^4]
   - [ ] Conditions
     - [x] `>`, `<`, `>=`, `<=`, `!=` conditions[^1]
     - [ ] `AND`, `OR` logical operator support (partial)[^2]
@@ -50,3 +50,4 @@ The grammar is written in accordance with [the approved notation sheet from the 
 [^1]: Instead of using `≠` as the not equal operator `!=` is being used for accessibility
 [^2]: Currently only one `AND` or `OR` operator can be used per condition, and one `NOT` operator per `>`, `<`, `>=`, `<=`, `!=` condition, since condition scoping has not been implemented yet.
 [^3]: Not implemented as it is not part of the spec (at least for now).
+[^4]: Compliant with [CS First Exams 2014 - Pseudocode in Examinations](https://computersciencewiki.org/images/c/c6/IB-Pseudocode-rules.pdf)
