@@ -116,22 +116,40 @@ WhileStatement
 IfStatement
   = IfToken _ condition:Condition _ ThenToken __
     consequent:Statements __
+   	conditional_alternate:(ElseToken _ IfToken _ Condition _ ThenToken __ Statements __)*
     ElseToken __ alternate:Statements __
     EndToken __ IfToken {
       return {
         type: "ifstatement",
         condition,
         consequent,
+        conditional_alternate: conditional_alternate.map(v => {
+			return {
+            	condition: v[4],
+                consequent: v[8],
+                alternate: [],
+                conditional_alternate: []
+            }
+		}),
         alternate
       }
     }
     / IfToken _ condition:Condition _ ThenToken __
     consequent:Statements __
+	conditional_alternate:(ElseToken _ IfToken _ Condition _ ThenToken __ Statements __)*
     EndToken _ IfToken {
       return {
         type: "ifstatement",
         condition,
         consequent,
+        conditional_alternate: conditional_alternate.map(v => {
+			return {
+            	condition: v[4],
+                consequent: v[8],
+                alternate: [],
+                conditional_alternate: []
+            }
+		}),
         alternate: null
       }
     }
@@ -187,16 +205,7 @@ OutputStatement
         values: [head].concat(tail.map(v => v[3]))
 	}
   }
-  
-/*
-        factors: [head].concat(tail.map(v => {
-			return {
-            	type: "operation",
-            	operator: v[1],
-                value: v[3]
-            }
-		}))
-*/
+
 InputStatement
   = InputToken __ symbol:Symbol {
     return {

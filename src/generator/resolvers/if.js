@@ -1,10 +1,13 @@
 function ifstatement(resolvers, ast) {
+    console.log("pog2")
     let condition = resolvers[ast.condition.type](resolvers, ast.condition);
     let consequent = resolvers.statements(resolvers, ast.consequent), alternate = false;
     
     if (ast.alternate !== null) alternate = resolvers.statements(resolvers, ast.alternate);
+    let conditional_alternate = ast.conditional_alternate.map(v => ` else ${ifstatement(resolvers, v)}`);
 
-    return `if (${condition}) {\n${consequent}} ${alternate ? `else {\n${alternate}}` : ""}`;
+
+    return `if (${condition}) {\n${consequent}}${conditional_alternate}${alternate ? ` else {\n${alternate}}` : ""}`;
 }
 
 

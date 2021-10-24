@@ -162,7 +162,7 @@ describe("transpiler", function() {
                 loop K from 4 to 8
                     output K
                 end loop
-            `, { debug: true, output: x => lines.push(...x) });
+            `, { debug: false, output: x => lines.push(...x) });
 
             eval(`(${program})();`);
             lines = lines.join(" ").split("\t").map(v => v.trim().split(" "));
@@ -188,6 +188,22 @@ describe("transpiler", function() {
             
             it(`from/to`, () => assert.deepStrictEqual(lines[2], [ '4', '5', '6', '7' ]))
 
+        })
+
+        describe("if", function() {
+            let program = transpiler.transpile(`
+                X = 1
+
+                if X = 0 then
+                    output 0
+                else if X = 1 then
+                    output 10
+                else
+                    output 20
+                end if
+            `, { debug: true, output: x => it("conditional alternate", () => x[0] === 10) });
+
+            eval(`(${program})();`);
         })
     })
 })
