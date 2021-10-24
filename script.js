@@ -18,7 +18,7 @@ CodeMirror.defineSimpleMode("ib", {
       {regex: /"(?:[^\\]|\\.)*?(?:"|$)/, token: "string"},
       {regex: /'(?:[^\\]|\\.)*?(?:'|$)/, token: "string"},
 
-      {regex: /(?:if|while|else|then|end|loop|from|to|output|input)/, token: "keyword"},
+      {regex: /(?:if|while|else|then|end|loop|from|to|output|input|until)/, token: "keyword"},
       {regex: /(?:AND|NOT|OR)/, token: "atom"},
 
       {regex: /[0-9]+/, token: "number"},
